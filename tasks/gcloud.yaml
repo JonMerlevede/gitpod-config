@@ -1,0 +1,11 @@
+init: |
+  GCLOUD_VERSION="402.0.0"
+  t="$(mktemp -d)"
+  cd "$t" || exit
+  wget "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-${GCLOUD_VERSION}-linux-x86_64.tar.gz" -O gcloud.tar.gz
+  tar xvfz gcloud.tar.gz
+  mv google-cloud-sdk /workspace/gcloud
+  cd || exit
+  rm -r "$t"
+command: |
+  /workspace/gcloud/install.sh -q --usage-reporting=false --path-update=true
