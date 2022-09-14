@@ -5,7 +5,8 @@ I got bored of adding and maintaining similar Gitpod configurations over and ove
 
 This repository contains a collection of `.gitpod.yml` task definitions that I have found to be useful and Cloudflare Worker code for serving bundles of these tasks.
 
-There is a version of the generator hosted at https://gitpod.5ha.re. Feel free to host your own.
+There is a version of the bundler hosted at https://gitpod.5ha.re. Feel free to host your own.
+
 ## Usage
 
 The collection of task definitions is in the [tasks folder](https://github.com/JonMerlevede/gitpod-config/tree/main/tasks).
