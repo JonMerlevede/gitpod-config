@@ -1,8 +1,8 @@
 {
   "name": "gitpod-config",
   "scripts": {
-    "start": "node compile_config.mjs && wrangler dev --local --minify=false",
-    "deploy": "node compile_config.mjs && wrangler publish"
+    "start": "node compile-tasks.mjs && wrangler dev --local --minify=false",
+    "deploy": "node compile-tasks.mjs && wrangler publish"
   },
   "version": "0.0.0",
   "devDependencies": {
