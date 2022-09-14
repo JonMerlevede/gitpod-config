@@ -1,30 +1,24 @@
 
+# gitpod-config
 
-run `wrangler init` and create a typescript project
+I got bored of adding and maintaining similar Gitpod configurations over and over again to different repositories.
 
-install webpack: `npm install webpack webpack-cli --save-dev`
+This repository contains a collection of `.gitpod.yml` task definitions that I have found to be useful and code for a Cloudflare Worker serving bundles of these tasks.
 
-create `webpack.config.js` file for typescript as specified [the webpack docs](https://webpack.js.org/guides/typescript/)
+There is a version of the generator hosted at https://gitpod.5ha.re. Feel free to host your own.
+## Usage
 
-adapt webpack configuration to output a module instead of a script
+There is a collection of task definitions in the [tasks folder](https://github.com/JonMerlevede/gitpod-config/tree/main/tasks).
+
+Execute any combination of these tasks by adding the following to your `.gitpod.yml` file (adapt `TASKS` to change your bundle definition):
 ```
-output: {
-    filename: 'index.mjs',
-    path: path.join(__dirname, 'dist'),
-    library: {
-        type: 'module',
-    },
-},
-experiments: {
-    outputModule: true,
-},
+tasks:
+  - name: Gitpod installer
+    before: TASKS="browser+awscli"; eval "$(curl -s https://gitpod.5ha.re/before?tasks=$TASKS)"
+    init: eval "$(curl -s https://gitpod.5ha.re/init?tasks=$TASKS)"
+    command: eval "$(curl -s https://gitpod.5ha.re/command?tasks=$TASKS)"
 ```
 
-add `build` script to `package.json` for running `webpack`
+Evaluating remote code like this can be a security risk. You can alternatively generate a combined task bundle from the link below and copy+paste this to your `.gitpod.yml`:
 
-install yaml webpack loader `npm install --save-dev yaml-loader`
-
-add rules for laoding yaml to `webpack.config.js`
-
-add `yaml.d.ts` file to satisfy Typescript
-
+> https://gitpod.5ha.re/yaml?tasks=browser+exit
