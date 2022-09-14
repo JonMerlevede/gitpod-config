@@ -1,11 +1,11 @@
 
 # gitpod-config
 
-I got bored of adding and maintaining similar Gitpod configurations over and over again to different repositories.
+I got bored of adding and maintaining similar Gitpod configurations over and over again to different repositories; this is an attempt at centralizing my Gitpod configuration efforts.
 
-This repository contains a collection of `.gitpod.yml` task definitions that I have found to be useful and Cloudflare Worker code for serving bundles of these tasks.
+This repository contains a collection of `.gitpod.yml` task definitions that I have found to be useful. It also contains code for serving bundles of these tasks that can run on Cloudflare Workers.
 
-There is a version of the bundler hosted at https://gitpod.5ha.re. Feel free to host your own.
+There is a version of the bundler hosted at https://gitpod.5ha.re. Feel free to use it; you can also easily host your own.
 
 ## Usage
 
