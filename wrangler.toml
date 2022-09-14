@@ -1,3 +1,3 @@
-name = "gitpod-config"
+name = "gitpod"
 compatibility_date = "2022-09-14"
 main = "src/index.ts"
