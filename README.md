@@ -11,7 +11,7 @@ There is a version of the bundler hosted at https://gitpod.5ha.re. Feel free to 
 
 The collection of task definitions is in the [tasks folder](https://github.com/JonMerlevede/gitpod-config/tree/main/tasks).
 
-Execute a bundle of these tasks by adding the following to your `.gitpod.yml` file (adapt `TASKS` to change your bundle definition):
+You can use the bundler application to execute a bundle of these tasks by adding the following to your `.gitpod.yml` file (adapt `TASKS` to change your bundle definition):
 ```
 tasks:
   - name: Gitpod installer
