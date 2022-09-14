@@ -1,17 +1,24 @@
+gitpod-config
+=============
 
-# gitpod-config
+Copying similar Gitpod configurations repeatedly to all your projects' repositories gets old quickly. Many copies are also hard to maintain. This project attempts to address or at least centralize my Gitpod configuration woes.
 
-I got bored of adding and maintaining similar Gitpod configurations over and over again to different repositories; this is an attempt at centralizing my Gitpod configuration efforts.
+Most important is the collection of task definitions that I found helpful. There is also code for a web application combining tasks into task bundles. The bundler can expose bundles either as Bash scripts that can be evaluated directly or as Gitpod YAML configuration.
 
-This repository contains a collection of `.gitpod.yml` task definitions that I have found to be useful. It also contains code for serving bundles of these tasks that can run on Cloudflare Workers.
+I host the bundler at https://gitpod.5ha.re. Feel free to use it; you can also easily host your own (see below).
 
-There is a version of the bundler hosted at https://gitpod.5ha.re. Feel free to use it; you can also easily host your own.
 
-## Usage
+Tasks
+------------
 
-The collection of task definitions is in the [tasks folder](https://github.com/JonMerlevede/gitpod-config/tree/main/tasks).
+Find the collection of tasks in the [tasks folder](https://github.com/JonMerlevede/gitpod-config/tree/main/tasks).
+The name of the YAML file corresponds to the task's name when using the bundler.
 
-You can use the bundler application to execute a bundle of these tasks by adding the following to your `.gitpod.yml` file (adapt `TASKS` to change your bundle definition):
+
+Bundler
+------------
+
+Execute task bundles by adding the following to your `.gitpod.yml` file:
 ```
 tasks:
   - name: Gitpod installer
@@ -19,15 +26,28 @@ tasks:
     init: eval "$(curl -s https://gitpod.5ha.re/init?tasks=$TASKS)"
     command: eval "$(curl -s https://gitpod.5ha.re/command?tasks=$TASKS)"
 ```
+`TASKS` defines the set of tasks to include in the bundle; `+` characters must separate task names.
 
-Evaluating remote code like this can be a security risk. You can alternatively generate a combined task bundle from the link below and copy+paste this to your `.gitpod.yml`:
+Alternatively, if you prefer not to evaluate remote code like this, generate a combined task bundle:
+```
+wget https://gitpod.5ha.re/yaml?tasks=browser+exit -O .gitpod.yml
+```
+
+In the likely case that you have an existing `.gitpod.yml` file, you must manually merge the output of the `/yaml` endpoint with your existing configuration:
 
 > https://gitpod.5ha.re/yaml?tasks=browser+exit
 
-## Development nodes
-I do not usually write node code and never used Workers before; the code is not particularly pretty.
 
-To deploy your own Worker:
+Notes
+------------
+
+* Bundler code targets deployment on [Cloudflare Workers](https://workers.cloudflare.com/).
+* Tasks should work when using Gitpod's default `workspace-full` image. They might not work with other images.
+* I do not usually write TypeScript or JavaScript code and never used Workers before; the bundler code is not particularly pretty.
+* This scratches my Gitpod configuration itch; do not expect me to improve or maintain this (I might, though).
+* Gitpod can run custom images. I avoid this. Building custom images using a `Dockerfile` on Gitpod can take ages and can time out. Workspaces with custom images also take much longer to start.
+
+To "self-host" a Worker:
 
 * Install the Cloudflare CLI Wrangler (version 2+): `npm install -g wrangler`
 * Initialize the project: `npm install`
