@@ -2,7 +2,7 @@
   "name": "gitpod-config",
   "scripts": {
     "build": "node compile_config.mjs && webpack",
-    "start": "wrangler dev",
+    "start": "wrangler dev dist/index.mjs",
     "deploy": "wrangler publish"
   },
   "version": "0.0.0",
