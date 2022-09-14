@@ -1,0 +1,8 @@
+init: |
+  cat > /workspace/bin/open.sh <<'EOF'
+  #!/bin/bash
+  exec gp preview --external "$@"
+  EOF
+  chmod +x /workspace/bin/open.sh
+command: |
+  sudo update-alternatives --install /usr/bin/www-browser www-browser /workspace/bin/open.sh 100

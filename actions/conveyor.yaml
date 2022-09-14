@@ -1,0 +1,10 @@
+init: |
+  tmpdir=$(mktemp -d)
+  cd "$tmpdir" || exit
+  wget https://app.conveyordata.com/api/info/cli/location/linux/amd64 -O c.tar.gz
+  tar -zxvf c.tar.gz --one-top-level
+  chmod +x c/bin/linux/amd64/conveyor
+  install c/bin/linux/amd64/conveyor /workspace/bin/conveyor
+  install c/bin/linux/amd64/datafy /workspace/bin/datafy
+  cd || exit
+  rm -r "$tmpdir"

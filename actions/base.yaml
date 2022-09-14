@@ -1,0 +1,4 @@
+init: |
+  mkdir -p /workspace/bin
+command: |
+  echo "export PATH=\"/workspace/bin:\$PATH\"" >> ~/.bashrc

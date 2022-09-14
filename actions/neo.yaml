@@ -1,0 +1,8 @@
+init: |
+  tmpdir=$(mktemp -d)
+  cd "$tmpdir" || exit
+  wget https://platform.neo.dna.luminus.be/cli/linux/amd64 -O n.tar.gz
+  tar zxvf n.tar.gz
+  install neo /workspace/bin
+  cd || exit
+  rm -r "$tmpdir"
