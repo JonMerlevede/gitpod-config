@@ -11,6 +11,7 @@ command: |
   /workspace/miniconda/bin/conda init
   # Always install latest package version, only using channel priority to break ties
   # See: conda config --describe channel_priority
-  conda config --set channel_priority strict
-  conda config --set experimental_solver libmamba
-  conda config --set safety_checks disabled
+  /workspace/miniconda/bin/conda config --prepend channels conda-forge
+  /workspace/miniconda/bin/conda config --set channel_priority strict
+  /workspace/miniconda/bin/conda config --set experimental_solver libmamba
+  /workspace/miniconda/bin/conda config --set safety_checks disabled
