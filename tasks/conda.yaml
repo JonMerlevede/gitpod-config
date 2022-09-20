@@ -1,11 +1,16 @@
 init: |
   tmp="$(mktemp -d)"
   cd "$tmp" || exit
-  #wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh && \
   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
   chmod +x *.sh
   # target directory should *not* already exist
   ./*.sh -b -p /workspace/miniconda
   cd && rm -r "$tmp"
+  /workspace/miniconda/bin/conda install -n base conda-libmamba-solver -y
 command: |
   /workspace/miniconda/bin/conda init
+  # Always install latest package version, only using channel priority to break ties
+  # See: conda config --describe channel_priority
+  conda config --set channel_priority strict
+  conda config --set experimental_solver libmamba
+  conda config --set safety_checks disabled
