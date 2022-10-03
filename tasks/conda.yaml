@@ -5,13 +5,19 @@ init: |
   chmod +x *.sh
   # target directory should *not* already exist
   ./*.sh -b -p /workspace/miniconda
+  touch /workspace/miniconda/.condarc
+  ln -s /workspace/miniconda/.condarc /home/gitpod/.condarc
   cd && rm -r "$tmp"
+  /workspace/miniconda/bin/conda config --set safety_checks disabled
   /workspace/miniconda/bin/conda install -n base conda-libmamba-solver -y
+  /workspace/miniconda/bin/conda config --set channel_priority strict
+  /workspace/miniconda/bin/conda config --prepend channels conda-forge
+  /workspace/miniconda/bin/conda config --set experimental_solver libmamba
 command: |
   /workspace/miniconda/bin/conda init
   # Always install latest package version, only using channel priority to break ties
   # See: conda config --describe channel_priority
-  /workspace/miniconda/bin/conda config --prepend channels conda-forge
-  /workspace/miniconda/bin/conda config --set channel_priority strict
-  /workspace/miniconda/bin/conda config --set experimental_solver libmamba
-  /workspace/miniconda/bin/conda config --set safety_checks disabled
+  # /workspace/miniconda/bin/conda config --prepend channels conda-forge
+  # /workspace/miniconda/bin/conda config --set channel_priority strict
+  # /workspace/miniconda/bin/conda config --set experimental_solver libmamba
+  # /workspace/miniconda/bin/conda config --set safety_checks disabled
