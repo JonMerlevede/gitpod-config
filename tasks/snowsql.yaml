@@ -1,0 +1,19 @@
+init: |
+  SNOWSQL_BOOTSTRAP_VERSION=1.2
+  SNOWSQL_VERSION=1.2.22
+  tmp=$(mktemp -d)
+  cd "$tmp" || exit
+  mkdir -p /workspace/bin
+  export SNOWSQL_DOWNLOAD_DIR="$tmp"
+  export SNOWSQL_DEST=/workspace/bin
+  curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/${SNOWSQL_BOOTSTRAP_VERSION}/linux_x86_64/snowsql-${SNOWSQL_VERSION}-linux_x86_64.bash
+  curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/${SNOWSQL_BOOTSTRAP_VERSION}/linux_x86_64/snowsql-${SNOWSQL_VERSION}-linux_x86_64.bash.sig
+  gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 37C7086698CB005C
+  gpg --verify snowsql-${SNOWSQL_VERSION}-linux_x86_64.bash.sig snowsql-${SNOWSQL_VERSION}-linux_x86_64.bash
+  touch "$tmp/dummy"
+  export SNOWSQL_LOGIN_SHELL="$tmp/dummy"
+  bash snowsql-${SNOWSQL_VERSION}-linux_x86_64.bash
+  cd && rm -r "$tmp"
+command: |
+  echo "export WORKSPACE=\"/workspace/\"" >> ~/.bashrc
+  export WORKSPACE="/workspace"
