@@ -1,0 +1,1 @@
+command: read -p "Press enter to quit" && exit
