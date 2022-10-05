@@ -8,4 +8,5 @@ init: |
   cd || exit
   rm -r "$t"
 command: |
-  /workspace/gcloud/install.sh -q --usage-reporting=false --path-update=true
+  /workspace/gcloud/install.sh -q --usage-reporting=false --path-update=true --additional-components gke-gcloud-auth-plugin
+  #gcloud components install gke-gcloud-auth-plugin --quiet
