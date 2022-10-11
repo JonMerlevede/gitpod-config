@@ -1,0 +1,4 @@
+command: |
+  sudo cp --archive --no-clobber ~/.config /workspace
+  sudo rm -rf ~/.config
+  ln -s /workspace/.config ~/
